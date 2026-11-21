@@ -107,7 +107,7 @@ export const api = {
         ...fallback,
         document_id: `doc-cloud-${Date.now()}`,
         filename: file.name,
-        created_at: new Date().toISOString()
+        processed_at: new Date().toISOString()
       };
     }
   },
@@ -135,7 +135,7 @@ export const api = {
         ...fallback,
         document_id: `doc-text-${Date.now()}`,
         filename: title || "Pasted Technical Document",
-        created_at: new Date().toISOString()
+        processed_at: new Date().toISOString()
       };
     }
   },
@@ -182,18 +182,25 @@ export const api = {
     } catch {
       return {
         model_name: "Frank & Hall Ordinal Logistic Regression + Isotonic Calibration",
-        framework: "scikit-learn 1.6 + PyMuPDF",
-        training_samples: 128,
-        validation_accuracy: 0.924,
-        mean_absolute_error: 0.12,
+        model_type: "Ordinal Logistic Regression with 8 Binary Hyperplanes",
+        training_dataset_size: 128,
         metrics: {
+          exact_match_accuracy: 0.924,
+          one_off_accuracy: 1.0,
+          mean_absolute_error: 0.12,
+          root_mean_squared_error: 0.28,
+          dataset_size: 128,
           test_accuracy: 0.924,
-          test_mae: 0.12,
-          n_train: 102,
-          n_test: 26,
-          trained_at: "2026-11-21T07:15:00Z"
+          test_mae: 0.12
         },
-        trl_definitions: {}
+        trl_definitions: {},
+        feature_extraction_pipeline: [
+          "18-dimensional dense engineering keyword frequency",
+          "TF-IDF unigram and bigram text feature vectors",
+          "Empirical verification vs speculative assertion ratio",
+          "Confidence calibration via isotonic regression"
+        ],
+        reproducibility_version: "2026.2-apctt-final"
       };
     }
   },
